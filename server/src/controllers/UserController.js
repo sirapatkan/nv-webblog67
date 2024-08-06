@@ -1,11 +1,26 @@
+const {User} = require('../models')
 module.exports = {
 
 
-    index(req, res){
-        res.send('ดูข้อมูล user ทุกคน');
+    async index(req, res){
+        try {
+            const users = await User.findAll()
+            res.send(users)
+            } catch (err){
+            res.status(500).send({
+            error: 'The users information was incorrect'
+            })
+            }
     },
-    create(req, res){
-    res.send("สร้าง user "+ JSON.stringify(req.body.username));
+    async create(req, res){
+        try {
+            const user = await User.create(req.body)
+            res.send(user.toJSON())
+            } catch (err) {
+            res.status(500).send({
+            error: 'Create user incorrect'
+            })
+            }
     },
     
     put(req, res){
@@ -21,7 +36,9 @@ module.exports = {
      show(req, res){
         res.send('ดูข้อมูล user ทุกคน');
      }
-        
+
+     
+
     
         }
     
