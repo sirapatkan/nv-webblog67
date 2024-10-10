@@ -1,9 +1,9 @@
 const UserController = require('./controllers/UserController');
 const UserAuthenController = require('./controllers/UserAuthenController');
 const isAuthenController = require('./authen/isAuthenController');
-const BlogController = require('./controllers/BlogController');
+const KeyboardController = require('./controllers/KeyboardController'); // เปลี่ยน BlogController เป็น KeyboardController
 
-let multer = require("multer")
+let multer = require("multer");
 
 // upload section
 let storage = multer.diskStorage({
@@ -11,12 +11,11 @@ let storage = multer.diskStorage({
         callback(null, "./public/uploads");
     },
     filename: function (req, file, callback) {
-        // callback(null, file.fieldname + '-' + Date.now());
         console.log(file);
         callback(null, file.originalname);
     }
-})
-let upload = multer({ storage: storage }).array("userPhoto", 10)
+});
+let upload = multer({ storage: storage }).array("userPhoto", 10);
 
 module.exports = (app) => {
     app.get('/users', isAuthenController, UserController.index);
@@ -25,38 +24,38 @@ module.exports = (app) => {
     app.put('/user/:userId', UserController.put);
     app.delete('/user/:userId', UserController.remove);
     app.post('/login', UserAuthenController.login);
-    app.post('/blog', BlogController.create);
-    app.put('/blog/:blogId', BlogController.put);
-    app.delete('/blog/:blogId', BlogController.remove);
-    app.get('/blog/:blogId', BlogController.show);
-    app.get('/blogs', BlogController.index);
+
+    // เปลี่ยนเส้นทางทั้งหมดที่เกี่ยวกับ blog เป็น keyboard
+    app.post('/keyboard', KeyboardController.create);
+    app.put('/keyboard/:keyboardId', KeyboardController.put);
+    app.delete('/keyboard/:keyboardId', KeyboardController.remove);
+    app.get('/keyboard/:keyboardId', KeyboardController.show);
+    app.get('/keyboards', KeyboardController.index);
 
     // upload
     app.post("/upload", function (req, res) {
-        // isUserAuthenticated,
         upload(req, res, function (err) {
             if (err) {
                 return res.end("Error uploading file.");
             }
             res.end("File is uploaded");
-        })
-    }),
+        });
+    });
 
-    //delete file uploaded function
+    // delete file uploaded function
     app.post('/upload/delete', async function (req, res) {
         try {
-            const fs = require('fs'); 
-            console.log(req.body.filename)
+            const fs = require('fs');
+            console.log(req.body.filename);
 
             fs.unlink(process.cwd() + '/public/uploads/' + req.body.filename, (err) => {
                 if (err) throw err;
-                res.send("Delete sucessful")
-                // console.log('successfully deleted material file');
+                res.send("Delete successful");
             });
         } catch (err) {
             res.status(500).send({
-                error: 'An error has occured trying to delete file the material'
-            })
+                error: 'An error has occurred trying to delete the file'
+            });
         }
-    })
-}
+    });
+};
