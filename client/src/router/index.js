@@ -9,10 +9,10 @@ import Login from '@/components/Login'
 
 import CommentIndex from '@/components/Comments/index' 
 
-import BlogIndex from '@/components/Blogs/index'
-import BlogCreate from '@/components/Blogs/CreateBlog'
-import BlogShow from '@/components/Blogs/ShowBlog'
-import BlogEdit from '@/components/Blogs/EditBlog'
+import KeyboardIndex from '@/components/keyboards/index'
+import KeyboardCreate from '@/components/Keyboards/CreateKeyboard'
+import KeyboardShow from '@/components/Keyboards/ShowKeyboard'
+import KeyboardEdit from '@/components/Keyboards/EditKeyboard'
 
 import Upload from '@/components/Util/Upload'
 
@@ -47,24 +47,24 @@ export default new Router({
       component: Login
     },
     {
-      path: '/blogs',
-      name: 'blogs',
-      component: BlogIndex
+      path: '/keyboards',
+      name: 'keyboards',
+      component: KeyboardIndex
     },
     {
-      path: '/blog/create',
-      name: 'blog-create',
-      component: BlogCreate
+      path: '/keyboard/create',
+      name: 'keyboard-create',
+      component: KeyboardCreate
     },
     {
-      path: '/blog/edit/:blogId',
-      name: 'blog-edit',
-      component: BlogEdit
+      path: '/keyboard/edit/:keyboardId',
+      name: 'keyboard-edit',
+      component: KeyboardEdit
     },
     {
-      path: '/blog/:blogId',
-      name: 'blog',
-      component: BlogShow
+      path: '/keyboard/:keyboardId',
+      name: 'keyboard',
+      component: KeyboardShow
     },
     {
       path: '/comments',

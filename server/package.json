@@ -9,6 +9,7 @@
   "author": "Nattapon Kumyaito",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.3",
     "body-parser": "^1.20.2",
@@ -19,6 +20,10 @@
     "multer": "^1.4.5-lts.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+=======
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+>>>>>>> 76469648f2680bb426e4a0b261136eb9b29f0d95
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   }
